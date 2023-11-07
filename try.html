@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %} Balaji_Sports {% endblock %}
+{% load static %}
+{% block body %}
+        <!-- Header-->
+        <header class="bg-light py-5" style="padding-top: 0px !important; padding-bottom:20px !important;">
+            <p class="lead fw-normal text-white mb-0 text-center bg-dark"><marquee behavior="scroll" direction="left" width="30%" scrollamount="7"><img src="{% static 'images/truck.png'%}" alt="" width="40px" style="filter: invert(100%)"> Free delivery above Rs.999/- <img src="{% static 'images/truck.png'%}" alt="" width="40px" style="filter: invert(100%)" ></marquee> </p>
+            <img src="{% static 'images/background.jpg' %}" alt="img" style="position:relative; width:100%; height:100%;" >
+        </header>
+        <!-- Section-->
+        <section class="py-5" style="padding-top:0px !important;">
+
+            <div class="container px-4 px-lg-5 mt-5 ">
+            <div id="demo" class="carousel slide" data-ride="carousel">
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1" ></li>
+                    <li data-target="#demo" data-slide-to="2" ></li>
+                </ul>
+                <div class="container crousal-inner no-padding ">
+                    {% for prod in products %}
+                    {% if prod.id == 1 %}
+                    <div class="carousal-item active">
+                    {% elif prod.id|divisibleby:5 %}
+                    <div class="carousal-item">
+                    {% endif %}
+                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5">
+                        <div class="card h-100" >
+                            <!-- Sale badge-->
+                            {% if prod.product_sale %}
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            {% endif %}
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{prod.product_img.url}}" alt="..." height="230px" />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{prod.product_name}}</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    {% if prod.product_sale %}
+                                    <span class="text-muted text-decoration-line-through">$20.00</span>
+                                    {% endif %}
+                                    $18.00
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    </div>
+                <!-- left and right controls for the slide -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon" style="background-color:blue;"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="prev">
+                <span class="carousel-control-next-icon" style="background-color:blue;"></span>
+            </a>
+            </div>
+            </div>
+        </section>
+        
+        {% endblock %}
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- {% extends "base.html" %}
+
+{% block title %} About Us {% endblock %}
+{% block body %} this is about us page
+
+<div class="owl-carousel owl-theme">
+    <div class="item"><h4>1</h4></div>
+    <div class="item"><h4>2</h4></div>
+    <div class="item"><h4>3</h4></div>
+    <div class="item"><h4>4</h4></div>
+    <div class="item"><h4>5</h4></div>
+    <div class="item"><h4>6</h4></div>
+    <div class="item"><h4>7</h4></div>
+    <div class="item"><h4>8</h4></div>
+    <div class="item"><h4>9</h4></div>
+    <div class="item"><h4>10</h4></div>
+    <div class="item"><h4>11</h4></div>
+    <div class="item"><h4>12</h4></div>
+</div>
+
+
+{% endblock body %}
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
+</script> -->

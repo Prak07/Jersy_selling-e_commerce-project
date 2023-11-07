@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} SimpleKits {% endblock %}
+{% block body %}
+
+<section class="py-5" style="padding-top:0px !important;">
+    <div class="container px-4 px-lg-5 mt-5">
+        {% if count >= 10 %}
+        <div class="row owl-carousel owl-theme">
+        {% else %}
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% endif %}
+            {% for prod in products %}
+            {% if prod.Simple_kit%}
+            <div class="col mb-5">
+                <div class="card h-100 item">
+                    <!-- Sale badge-->
+                    {% if prod.product_sale %}
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    {% endif %}
+                    <!-- Product image-->
+                    <img class="card-img-top" src="{{prod.product_img.url}}" alt="..." height="230px" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{prod.product_name}}</h5>
+                            <!-- Product reviews-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Product price-->
+                            {% if prod.product_sale %}
+                            <span class="text-muted text-decoration-line-through">Rs. {{prod.product_price}}</span>
+                            Rs. {{prod.product_sale_price}}
+                            {% else %}
+                            Rs. {{prod.product_price}}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><button class="btn btn-outline-dark mt-auto cart" id="{{prod.id}}">Add to cart</button></div>
+                    </div>  
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock body %}

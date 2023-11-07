@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+{% load static %}
+{% block body %}
+<style>
+    .best {
+        display: block;
+        font-size: 1.17em;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+        margin-top: 70px;
+        margin-bottom: 0px;
+        font-family: sans-serif;
+    }
+    .best {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px;
+    }
+    .best span{
+        padding: 0 15px;
+    }
+    .best::before{
+        content: "";
+        flex: 1 0 0%;
+        display: inline-block;
+        height: 2px;
+        background: 0 0;
+        border-top: 1.5px solid rgb(158, 151, 151);
+        max-width: 550px;
+    }
+
+    .best::after {
+        content: "";
+        flex: 1 0 0%;
+        display: inline-block;
+        height: 2px;
+        background: 0 0;
+        border-top: 1.5px solid rgb(167, 162, 162);
+        max-width: 550px;
+    }
+
+    .catagory{
+        width: 560px;           
+        height: 400px; 
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border: 2px solid black;
+    }
+
+</style>
+        <!-- Header-->
+        <header class="bg-light py-5" style="padding-top: 0px !important; padding-bottom:20px !important;">
+            <img src="{% static 'images/background.jpg' %}" alt="img" style="position:relative; width:100%; height:100%;" >
+        </header>
+        <h4 class="best"><span> BEST OF NORMAL KITS</span></h4>
+        <p style="text-align: center ; color:#817c7c; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">These Are Our All Time Best Selleing Normal Kits</p>
+        <!-- Section-->
+        <section class="py-5" style="padding-top:0px !important;">
+            <div class="container px-4 px-lg-5 mt-5">
+                {% if count >= 5 %}
+                <div class="row owl-carousel owl-theme">
+                {% else %}
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                {% endif %}
+                    {% for prod in products %}
+                    {% if prod.simple_best_seller%}
+                    <div class="col mb-5">
+                        <div class="card h-100 item">
+                            <!-- Sale badge-->
+                            {% if prod.product_sale %}
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            {% endif %}
+                            <!-- Product image-->
+                            <a href=""><img class="card-img-top" src="{{prod.product_img.url}}" alt="..." height="230px" /></a>
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <a href="/productview/{{prod.id}}" class="link" style="text-decoration: none; color:black;"><h5 class="fw-bolder">{{prod.product_name}}</h5></a>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    {% if prod.product_sale %}
+                                    <span class="text-muted text-decoration-line-through">Rs. {{prod.product_price}}</span>
+                                    Rs. {{prod.product_sale_price}}
+                                    {% else %}
+                                    Rs. {{prod.product_price}}
+                                    {% endif %}
+                                
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><button class="btn btn-outline-dark mt-auto cart" id="{{prod.id}}">Add to cart</button></div>
+                            </div>  
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <h4 class="best"><span>BEST OF MASTER KITS</span></h4>
+            <p style="text-align: center ; color:#817c7c; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">These Are Our All Time Best Selleing Master Kits</p>
+            <div class="container px-4 px-lg-5 mt-5">
+                {% if countm >= 5 %}
+                <div class="row owl-carousel owl-theme">
+                {% else %}
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                {% endif %}
+                    {% for prod in products %}
+                    {% if prod.master_best_seller %}
+                    <div class="col mb-5">
+                        <div class="card h-100 item">
+                            <!-- Sale badge-->
+                            {% if prod.product_sale %}
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            {% endif %}
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{prod.product_img.url}}" alt="..." height="230px" />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{prod.product_name}}</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    {% if prod.product_sale %}
+                                    <span class="text-muted text-decoration-line-through">Rs. {{prod.product_price}}</span>
+                                    Rs. {{prod.product_sale_price}}
+                                    {% else %}
+                                    Rs. {{prod.product_price}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
+                                <div class="text-center"><button class="btn btn-outline-dark mt-auto cart" id="{{prod.id}}">Add to cart</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <h4 class="best"><span style="font-size: 30px;">SHOP BY CATAGORY</span></h4>
+            <p style="text-align: center ; color:#817c7c; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ; font-size:large">Here Are Our Product Catagories </p>
+        
+            <div style="display: inline-block; position: relative; text-align: center; margin-right: 50px; left:16%">
+                <a href="SimpleKits.html">
+                    <img src="{% static 'images/SimpleKits.jpg' %}" alt="" style="width: 500px; height:400px; border: 2px solid black;">
+                    <span style="position: absolute; top: 100%; left: 40%; color: rgb(63, 60, 60); font-weight: bold; font-size:25px">Normal Kits</span>
+                </a>
+            </div>
+            
+            <div style="display: inline-block; position: relative; text-align: center; left:16% ; border: 2px solid rgb(226, 11, 11)">
+                <a href="MasterKits.html">
+                    <img src="{% static 'images/MasterKits.jpg' %}" alt="" style="width: 500px; height:400px ">
+                    <span style="position: absolute; top: 100%; left: 40%; color: rgb(22, 16, 16); font-weight: bold; font-size:25px">Master Kits</span>
+                </a>
+            </div>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script>
+            $('.owl-carousel').owlCarousel({
+                loop:true,
+                margin:10,
+                nav:true,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:3
+                    },
+                    1000:{
+                        items:4 
+                    }
+                }
+            });
+        </script>
+        
+        {% endblock body %}
+</html>
