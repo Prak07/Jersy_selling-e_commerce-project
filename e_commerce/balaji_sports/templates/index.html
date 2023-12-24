@@ -143,12 +143,12 @@
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             {% endif %}
                             <!-- Product image-->
-                            <a href="/productview/{{prod.id}}"><img class="card-img-top" src="{{prod.product_img.url}}" alt="..." height="230px" /></a>
+                            <a href="/productview/{{prod.id}}"><img class="card-img-top" id="image{{prod.id}}" src="{{prod.product_img.url}}" alt="..." height="230px" /></a>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <a href="/productview/{{prod.id}}" class="link" style="text-decoration: none; color:black;"><h5 class="fw-bolder">{{prod.product_name}}</h5></a>
+                                    <a href="/productview/{{prod.id}}" class="link" style="text-decoration: none; color:black;"><h5 class="fw-bolder" id="name{{prod.id}}">{{prod.product_name}}</h5></a>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
@@ -159,10 +159,10 @@
                                     </div>
                                     <!-- Product price-->
                                     {% if prod.product_sale %}
-                                    <span class="text-muted text-decoration-line-through">Rs. {{prod.product_price}}</span>
+                                    <span class="text-muted text-decoration-line-through" id="price{{prod.id}}">Rs. {{prod.product_price}}</span>
                                     Rs. {{prod.product_sale_price}}
                                     {% else %}
-                                    Rs. {{prod.product_price}}
+                                    <span id="price{{prod.id}}">Rs. {{prod.product_price}}</span>
                                     {% endif %}
                                 
                                 </div>
@@ -200,14 +200,15 @@
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             {% endif %}
                             <!-- Product image-->
-                            <a href="/productview/{{prod.id}}"><img class="card-img-top" src="{{prod.product_img.url}}" alt="..." height="230px" /></a>
+                            <a href="/productview/{{prod.id}}"><img class="card-img-top" id="image{{prod.id}}" src="{{prod.product_img.url}}" alt="..." height="230px" /></a>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <a href="/productview/{{prod.id}}" class="link" style="text-decoration: none; color:black;"><h5 class="fw-bolder">{{prod.product_name}}</h5></a>
+                                    <a href="/productview/{{prod.id}}" class="link" style="text-decoration: none; color:black;">
+                                        <h5 class="fw-bolder" id="name{{prod.id}}">{{prod.product_name}}</h5></a>
                                     <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="d-flex justify-content-center small text-warning mb-2" style="font-size: ;">
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
@@ -216,11 +217,13 @@
                                     </div>
                                     <!-- Product price-->
                                     {% if prod.product_sale %}
-                                    <span class="text-muted text-decoration-line-through">Rs. {{prod.product_price}}</span>
+                                    <span class="text-muted text-decoration-line-through" id="price{{prod.id}}">Rs. {{prod.product_price}}</span>
                                     Rs. {{prod.product_sale_price}}
                                     {% else %}
-                                    Rs. {{prod.product_price}}
+                                    <span id="price{{prod.id}}">Rs. {{prod.product_price}}</span>
                                     {% endif %}
+                                    
+                                    
                                 </div>
                             </div>
                             <!-- Product actions-->

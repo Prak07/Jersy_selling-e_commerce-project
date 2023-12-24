@@ -79,6 +79,7 @@
     //find if the cart is present in the local storage or not
     if (localStorage.getItem('cart') == null){
         var cart = {};
+        update_popover(cart);
     }
     else{
         cart = JSON.parse(localStorage.getItem('cart'));
@@ -89,12 +90,14 @@
         });
         const change_count=document.getElementById('cart_count')
         change_count.innerText=count
+        update_popover(cart);
     }
     //if the cart button is clicked item is added
     const cart_button = document.querySelectorAll('.cart')
     cart_button.forEach( (button) => {
         button.addEventListener('click', function() {
             //console.log('Button clicked!');
+            update_popover(cart);
             var idstr=this.id.toString();
             if (cart[idstr]!=undefined){
                 cart[idstr]=cart[idstr]+1;
@@ -102,20 +105,34 @@
             else{
                 cart[idstr]=1;
             }
-
-            localStorage.setItem('cart',JSON.stringify(cart))
+            localStorage.setItem('cart',JSON.stringify(cart));
             const items=Object.values(cart);
             var count=0;
             items.forEach((i)=>{
                 count=count+i;
             });
-            const change_count=document.getElementById('cart_count')
-            change_count.innerText=count
+            const change_count=document.getElementById('cart_count');
+            change_count.innerText=count;          
         });
     });
 
-$('#cart_pop').popover();
-document.getElementById("cart_pop").setAttribute('data-content','<h6>cart</h6>');
+function update_popover(cart){
+    var content="";
+    content=content+"<h5>SHOPPING CART</h5><p class='lead fw-normal text-black mb-0 text-center bg-light' style='font-size: 15px !important;'><img src='{% static 'images/truck.png'%}' alt='' width='30px' > Free delivery above Rs.999/- </p>"
+    for (var item in cart){
+        var img=document.getElementById("image"+item).src;
+        content=content+"<a href='/productview/"+item+"'><img  src='"+img+"' alt='...' width='100px' /></a>";
+        var name=document.getElementById("name"+item).innerHTML;
+        content=content+"<a href='/productview/"+item+"' style='text-decoration: none; color:black;'><h10 class='fw-bolder'>"+name+" </h10></a>";
+        var price=document.getElementById("price"+item).innerHTML;
+        content=content+"<span style='font-size:10px;' >"+price+"</span>";
+        content=content+"<span style='font-size:10px;'>Qty."+cart[item]+"</span>"
+    }
+    document.getElementById("cart_pop").setAttribute('data-content',content);
+    $('#cart_pop').popover('show');
+
+}
+
 </script>
 {% block js %}  {% endblock js %}
 </html>
