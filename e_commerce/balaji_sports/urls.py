@@ -15,6 +15,7 @@ urlpatterns = [
     path('checkout/',Checkout,name='Checkout'),
     path('cart/',Cart,name='Cart'),
     path('login/',login,name='login'),
+    path('update_item/',updateitem,name='update_item'),
     path('',include("accounts.urls"))
 ]
 

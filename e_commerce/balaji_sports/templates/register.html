@@ -1,0 +1,230 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    <form action="register" method="post">
+        {% csrf_token %}
+
+        First Name:<input type="text" name="First_name" ><br><br>
+        Last Name:<input type="text" name="Last_name" ><br><br>
+        Username:<input type="text" name="Username" ><br><br>
+        email:<input type="email" name="email" ><br><br>
+        Password:<input type="password" name="password" ><br><br>
+        Confirm Password:<input type="password" name="confirm password" ><br><br>
+        <button type="submit">Create</button>        
+    </form>
+</body>
+</html> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+      body {
+        display: flex;
+        background-color: #252525;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    h4{
+      text-align: center;
+      font-size: large;
+      margin-top: 0;
+      margin-left: 60px;
+      border: 2px solid rgb(114, 103, 103);
+      background-color: #dcf465;
+      border-radius: 20px;
+      width: 250px;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 350px;
+      background-color: #b2cde4;
+      padding: 40px;
+      border-radius: 20px;
+      position: relative;
+      height: 580px;
+    }
+    
+    .title {
+      font-size: 28px;
+      color: royalblue;
+      font-weight: 600;
+      letter-spacing: -1px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-left: 30px;
+    }
+    
+    .title::before,.title::after {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      left: 0px;
+      background-color: royalblue;
+    }
+    
+    .title::before {
+      width: 18px;
+      height: 18px;
+      background-color: royalblue;
+    }
+    
+    .title::after {
+      width: 18px;
+      height: 18px;
+      animation: pulse 1s linear infinite;
+    }
+    
+    .message{
+      color: rgba(48, 48, 105, 0.822);
+      font-size: 20px;
+      text-align: center;
+    }
+    
+    .signin {
+      color: rgba(88, 87, 87, 0.822);
+      font-size: 14px;
+      text-align: center;
+    }
+    
+    .signin a {
+      color: royalblue;
+    }
+    
+    .signin a:hover {
+      text-decoration: underline royalblue;
+    }
+    
+    .flex {
+      display: flex;
+      width: 100%;
+      gap: 6px;
+    }
+    
+    .form label {
+      position: relative;
+    }
+    
+    .form label .input {
+      width: 100%;
+      padding: 10px 10px 20px 10px;
+      outline: 0;
+      border: 1px solid rgba(105, 105, 105, 0.397);
+      border-radius: 10px;
+    }
+    
+    .form label .input + span {
+      position: absolute;
+      left: 10px;
+      top: 15px;
+      color: grey;
+      font-size: 0.9em;
+      cursor: text;
+      transition: 0.3s ease;
+    }
+    
+    .form label .input:placeholder-shown + span {
+      top: 15px;
+      font-size: 0.9em;
+    }
+    
+    .form label .input:focus + span,.form label .input:valid + span {
+      top: 30px;
+      font-size: 0.7em;
+      font-weight: 600;
+    }
+    
+    .form label .input:valid + span {
+      color: green;
+    }
+    #firstname{
+      width: 150px;
+    }
+
+    .submit {
+      border: none;
+      outline: none;
+      background-color: royalblue;
+      padding: 10px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      transform: .3s ease;
+    }
+    
+    .submit:hover {
+      background-color: rgb(56, 90, 194);
+    }
+    
+    @keyframes pulse {
+      from {
+        transform: scale(0.9);
+        opacity: 1;
+      }
+    
+      to {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+    </style>
+</head>
+<body>
+    <form class="form" action="#" method="post">
+      {% csrf_token %}
+      <p class="title">Register To Travello</p>
+      <p class="message">Start Your Journy With US !! </p>
+      <div class="flex">
+          <label>
+              <input class="input" type="text" name="firstname" id="firstname" required>
+              <span>Firstname</span>
+          </label>
+  
+          <label>
+              <input class="input" type="text" name="lastname" required>
+              <span>Lastname</span>
+          </label>
+      </div>  
+              
+      <label>
+          <input class="input" type="email" name="email" required>
+          <span>Email</span>
+      </label> 
+      <label>
+          <input class="input" type="text" name="username" required>
+          <span>Username</span>
+      </label> 
+          
+      <label>
+          <input class="input" type="password" name="password" required>
+          <span>Password</span>
+      </label>
+      <label>
+          <input class="input" type="password" name="confirm_password" required>
+          <span>Confirm password</span>
+      </label>
+      <button class="submit">Sign Up</button>
+      <p class="signin">Already have an acount ? <a href="login">Log in</a></p>
+      {% if incorrect %}
+      <h4 style="color:red">{{incorrect}}</h4>
+    {% elif correct %}
+      <h4 style="color:green">{{correct}}</h4>
+      {% endif %}
+  </form>
+</body>
+</html>
