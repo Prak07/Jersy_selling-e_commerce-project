@@ -162,12 +162,6 @@
     transition: all .5s;
   }
    
-  .cable-choose button:hover,
-  .cable-choose button:active,
-  .cable-choose button:focus {
-    border: 2px solid #86939E;
-    outline: none;
-  }
    
   .cable-config {
     border-bottom: 1px solid #E1E8EE;
@@ -218,14 +212,14 @@
    
       <!-- Cable Configuration -->
     <div class="cable-config">
-        <span>Size Chart</span>
+        <span id="size">Size: S</span>
  
         <div class="cable-choose">
-          <button>S</button>
-          <button>M</button>
-          <button>L</button>
-          <button>XL</button>
-          <button>XXL</button>
+          <button id="S">S</button>
+          <button id="M">M</button>
+          <button id="L">L</button>
+          <button id="XL">XL</button>
+          <button id="XXL">XXL</button>
         </div>
       <!-- Product Pricing -->
       <div class="product-price">
@@ -245,5 +239,13 @@
       </div>
     </div>
   </main>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $("button").click(function(){
+      $("#size").text("Size: "+this.id);
+      $("button").css({"border": "2px solid #E1E8EE", "outline":"none"})
+      $(this).css({"border": "2px solid #86939E", "outline":"none"});
+    })
+  </script>
 
 {% endblock body %}
